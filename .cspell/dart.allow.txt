@@ -1,0 +1,9 @@
+# Allowed words for Dart files
+coverde
+endtemplate
+lcov
+melos
+mocktail
+pubspec
+riverpod
+unmanaged
