@@ -1,0 +1,14 @@
+targets:
+  $default:
+    builders:
+      dart_mappable_builder:
+        generate_for:
+          - lib/src/models/subject.dart
+          - lib/src/models/create_subject_dto.dart
+        options:
+          generateMethods:
+            - copy
+            - equals
+            - stringify
+            - decode
+            - encode
