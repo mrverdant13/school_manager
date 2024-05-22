@@ -18,7 +18,7 @@ class Subject with SubjectMappable {
   });
 
   /// The name of the ID column in the database.
-  static final idColumnName = SubjectMapper._f$id.name;
+  static final idColumnName = SubjectMapper._f$id.key;
 
   /// The ID of the subject.
   final int id;
