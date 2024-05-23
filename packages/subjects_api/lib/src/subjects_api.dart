@@ -90,6 +90,15 @@ class SubjectsApi {
     return streamController.stream.distinct();
   }
 
+  /// Watches a subject by its [id].
+  Stream<Subject> watchSubjectById(int id) {
+    return supabase
+        .from(subjectsTableName)
+        .stream(primaryKey: [Subject.idColumnName])
+        .eq(Subject.idColumnName, id)
+        .map((rows) => Subject.fromJson(rows.single));
+  }
+
   /// Retrieves a paginated list of subjects.
   Future<Iterable<Subject>> getSubjects({
     required int offset,
