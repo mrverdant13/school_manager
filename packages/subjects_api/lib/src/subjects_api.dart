@@ -26,12 +26,20 @@ class SubjectsApi {
   @visibleForTesting
   static const subjectCompetencesTableName = 'subject_competences';
 
+  /// The name of the table that contains competence skills.
+  @visibleForTesting
+  static const competenceSkillsTableName = 'competence_skills';
+
   /// The equality utility used to compare [Iterable]s of [Subject]s.
   static const IterableEquality<Subject> subjectsIterableEquality =
       IterableEquality();
 
   /// The equality utility used to compare [Iterable]s of [Competence]s.
   static const IterableEquality<Competence> competencesIterableEquality =
+      IterableEquality();
+
+  /// The equality utility used to compare [Iterable]s of [Skill]s.
+  static const IterableEquality<Skill> skillsIterableEquality =
       IterableEquality();
 
   /// Creates a new subject.
@@ -325,5 +333,50 @@ class SubjectsApi {
         .select()
         .single()
         .withConverter(Competence.fromJson);
+  }
+
+  /// Create a skill for a competence.
+  Future<Skill> createSkill(
+    CreateSkillDto createSkillDto,
+  ) async {
+    return supabase
+        .from(competenceSkillsTableName)
+        .insert(createSkillDto.toMap())
+        .select()
+        .single()
+        .withConverter(Skill.fromJson);
+  }
+
+  /// Watches a collection of skills that correspond to a competence with the
+  /// given [competenceId].
+  Stream<Iterable<Skill>> watchSkillsByCompetenceId(int competenceId) {
+    return supabase
+        .from(competenceSkillsTableName)
+        .stream(primaryKey: [Skill.idColumnName])
+        .eq(Skill.competenceIdColumnName, competenceId)
+        .map((rows) => rows.map(Skill.fromJson))
+        .distinct(skillsIterableEquality.equals);
+  }
+
+  /// Updates a skill.
+  Future<Skill> updateSkill(Skill skill) async {
+    return supabase
+        .from(competenceSkillsTableName)
+        .update(skill.toMap())
+        .eq(Skill.idColumnName, skill.id)
+        .select()
+        .single()
+        .withConverter(Skill.fromJson);
+  }
+
+  /// Deletes a skill by its [id].
+  Future<Skill> deleteSkillById(int id) async {
+    return supabase
+        .from(competenceSkillsTableName)
+        .delete()
+        .eq(Skill.idColumnName, id)
+        .select()
+        .single()
+        .withConverter(Skill.fromJson);
   }
 }
