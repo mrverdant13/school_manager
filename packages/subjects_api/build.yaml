@@ -5,7 +5,9 @@ targets:
         generate_for:
           - lib/src/models/competence.dart
           - lib/src/models/create_competence_dto.dart
+          - lib/src/models/create_skill_dto.dart
           - lib/src/models/create_subject_dto.dart
+          - lib/src/models/skill.dart
           - lib/src/models/subject.dart
         options:
           caseStyle: snakeCase
