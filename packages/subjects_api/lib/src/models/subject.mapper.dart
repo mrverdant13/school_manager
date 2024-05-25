@@ -30,6 +30,9 @@ class SubjectMapper extends ClassMapperBase<Subject> {
       Field('abbreviation', _$abbreviation);
   static Color _$color(Subject v) => v.color;
   static const Field<Subject, Color> _f$color = Field('color', _$color);
+  static int _$ordinalPosition(Subject v) => v.ordinalPosition;
+  static const Field<Subject, int> _f$ordinalPosition =
+      Field('ordinalPosition', _$ordinalPosition, key: 'ordinal_position');
 
   @override
   final MappableFields<Subject> fields = const {
@@ -37,6 +40,7 @@ class SubjectMapper extends ClassMapperBase<Subject> {
     #name: _f$name,
     #abbreviation: _f$abbreviation,
     #color: _f$color,
+    #ordinalPosition: _f$ordinalPosition,
   };
 
   static Subject _instantiate(DecodingData data) {
@@ -44,7 +48,8 @@ class SubjectMapper extends ClassMapperBase<Subject> {
         id: data.dec(_f$id),
         name: data.dec(_f$name),
         abbreviation: data.dec(_f$abbreviation),
-        color: data.dec(_f$color));
+        color: data.dec(_f$color),
+        ordinalPosition: data.dec(_f$ordinalPosition));
   }
 
   @override
@@ -96,7 +101,12 @@ extension SubjectValueCopy<$R, $Out> on ObjectCopyWith<$R, Subject, $Out> {
 
 abstract class SubjectCopyWith<$R, $In extends Subject, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({int? id, String? name, String? abbreviation, Color? color});
+  $R call(
+      {int? id,
+      String? name,
+      String? abbreviation,
+      Color? color,
+      int? ordinalPosition});
   SubjectCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -109,19 +119,26 @@ class _SubjectCopyWithImpl<$R, $Out>
   late final ClassMapperBase<Subject> $mapper =
       SubjectMapper.ensureInitialized();
   @override
-  $R call({int? id, String? name, String? abbreviation, Color? color}) =>
+  $R call(
+          {int? id,
+          String? name,
+          String? abbreviation,
+          Color? color,
+          int? ordinalPosition}) =>
       $apply(FieldCopyWithData({
         if (id != null) #id: id,
         if (name != null) #name: name,
         if (abbreviation != null) #abbreviation: abbreviation,
-        if (color != null) #color: color
+        if (color != null) #color: color,
+        if (ordinalPosition != null) #ordinalPosition: ordinalPosition
       }));
   @override
   Subject $make(CopyWithData data) => Subject(
       id: data.get(#id, or: $value.id),
       name: data.get(#name, or: $value.name),
       abbreviation: data.get(#abbreviation, or: $value.abbreviation),
-      color: data.get(#color, or: $value.color));
+      color: data.get(#color, or: $value.color),
+      ordinalPosition: data.get(#ordinalPosition, or: $value.ordinalPosition));
 
   @override
   SubjectCopyWith<$R2, Subject, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>

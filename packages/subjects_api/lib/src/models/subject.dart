@@ -22,10 +22,14 @@ class Subject with SubjectMappable {
     required this.name,
     required this.abbreviation,
     required this.color,
+    required this.ordinalPosition,
   });
 
   /// The name of the ID column in the database.
   static final idColumnName = SubjectMapper._f$id.key;
+
+  /// The name of the ordinal position column in the database.
+  static final ordinalPositionColumnName = SubjectMapper._f$ordinalPosition.key;
 
   /// The ID of the subject.
   final int id;
@@ -38,6 +42,9 @@ class Subject with SubjectMappable {
 
   /// The color of the subject.
   final Color color;
+
+  /// The ordinal position of the subject.
+  final int ordinalPosition;
 
   /// Creates a [Subject] from a JSON object.
   static const fromJson = SubjectMapper.fromMap;
