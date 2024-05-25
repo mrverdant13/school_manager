@@ -13,6 +13,7 @@ class SubjectMapper extends ClassMapperBase<Subject> {
   static SubjectMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = SubjectMapper._());
+      MapperContainer.globals.useAll([Int32ColorMapper()]);
     }
     return _instance!;
   }
@@ -27,8 +28,8 @@ class SubjectMapper extends ClassMapperBase<Subject> {
   static String _$abbreviation(Subject v) => v.abbreviation;
   static const Field<Subject, String> _f$abbreviation =
       Field('abbreviation', _$abbreviation);
-  static int _$color(Subject v) => v.color;
-  static const Field<Subject, int> _f$color = Field('color', _$color);
+  static Color _$color(Subject v) => v.color;
+  static const Field<Subject, Color> _f$color = Field('color', _$color);
 
   @override
   final MappableFields<Subject> fields = const {
@@ -95,7 +96,7 @@ extension SubjectValueCopy<$R, $Out> on ObjectCopyWith<$R, Subject, $Out> {
 
 abstract class SubjectCopyWith<$R, $In extends Subject, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({int? id, String? name, String? abbreviation, int? color});
+  $R call({int? id, String? name, String? abbreviation, Color? color});
   SubjectCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -108,7 +109,7 @@ class _SubjectCopyWithImpl<$R, $Out>
   late final ClassMapperBase<Subject> $mapper =
       SubjectMapper.ensureInitialized();
   @override
-  $R call({int? id, String? name, String? abbreviation, int? color}) =>
+  $R call({int? id, String? name, String? abbreviation, Color? color}) =>
       $apply(FieldCopyWithData({
         if (id != null) #id: id,
         if (name != null) #name: name,

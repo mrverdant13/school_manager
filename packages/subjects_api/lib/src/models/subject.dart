@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:subjects_api/src/mappers/mappers.dart';
 
 part 'subject.mapper.dart';
 
@@ -7,7 +10,11 @@ part 'subject.mapper.dart';
 ///
 /// A subject that can be taught in a school.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(
+  includeCustomMappers: [
+    Int32ColorMapper(),
+  ],
+)
 class Subject with SubjectMappable {
   /// {@macro subjects_api.subject}
   const Subject({
@@ -30,7 +37,7 @@ class Subject with SubjectMappable {
   final String abbreviation;
 
   /// The color of the subject.
-  final int color;
+  final Color color;
 
   /// Creates a [Subject] from a JSON object.
   static const fromJson = SubjectMapper.fromMap;
