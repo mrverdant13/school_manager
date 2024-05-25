@@ -115,6 +115,7 @@ class SubjectsApi {
     return await supabase
         .from(subjectsTableName)
         .select()
+        .order(Subject.ordinalPositionColumnName, ascending: true)
         .range(offset, offset + limit)
         .withConverter((rows) => rows.map(Subject.fromJson));
   }
