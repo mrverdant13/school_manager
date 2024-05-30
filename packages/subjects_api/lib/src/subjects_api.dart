@@ -262,6 +262,7 @@ class SubjectsApi {
         .from(subjectCompetencesTableName)
         .select()
         .eq(Competence.subjectIdColumnName, subjectId)
+        .order(Competence.ordinalPositionColumnName, ascending: true)
         .range(offset, offset + limit)
         .withConverter((rows) => rows.map(Competence.fromJson));
   }

@@ -27,19 +27,24 @@ class CompetenceMapper extends ClassMapperBase<Competence> {
       Field('subjectId', _$subjectId, key: 'subject_id');
   static String _$name(Competence v) => v.name;
   static const Field<Competence, String> _f$name = Field('name', _$name);
+  static int _$ordinalPosition(Competence v) => v.ordinalPosition;
+  static const Field<Competence, int> _f$ordinalPosition =
+      Field('ordinalPosition', _$ordinalPosition, key: 'ordinal_position');
 
   @override
   final MappableFields<Competence> fields = const {
     #id: _f$id,
     #subjectId: _f$subjectId,
     #name: _f$name,
+    #ordinalPosition: _f$ordinalPosition,
   };
 
   static Competence _instantiate(DecodingData data) {
     return Competence(
         id: data.dec(_f$id),
         subjectId: data.dec(_f$subjectId),
-        name: data.dec(_f$name));
+        name: data.dec(_f$name),
+        ordinalPosition: data.dec(_f$ordinalPosition));
   }
 
   @override
@@ -93,7 +98,7 @@ extension CompetenceValueCopy<$R, $Out>
 
 abstract class CompetenceCopyWith<$R, $In extends Competence, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({int? id, int? subjectId, String? name});
+  $R call({int? id, int? subjectId, String? name, int? ordinalPosition});
   CompetenceCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -106,16 +111,19 @@ class _CompetenceCopyWithImpl<$R, $Out>
   late final ClassMapperBase<Competence> $mapper =
       CompetenceMapper.ensureInitialized();
   @override
-  $R call({int? id, int? subjectId, String? name}) => $apply(FieldCopyWithData({
+  $R call({int? id, int? subjectId, String? name, int? ordinalPosition}) =>
+      $apply(FieldCopyWithData({
         if (id != null) #id: id,
         if (subjectId != null) #subjectId: subjectId,
-        if (name != null) #name: name
+        if (name != null) #name: name,
+        if (ordinalPosition != null) #ordinalPosition: ordinalPosition
       }));
   @override
   Competence $make(CopyWithData data) => Competence(
       id: data.get(#id, or: $value.id),
       subjectId: data.get(#subjectId, or: $value.subjectId),
-      name: data.get(#name, or: $value.name));
+      name: data.get(#name, or: $value.name),
+      ordinalPosition: data.get(#ordinalPosition, or: $value.ordinalPosition));
 
   @override
   CompetenceCopyWith<$R2, Competence, $Out2> $chain<$R2, $Out2>(
